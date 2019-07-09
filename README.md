@@ -192,7 +192,7 @@ run any method you wish. Froala methods are documented at https://www.froala.com
 
 For example, to create a 
 
-### The `ready` event
+### Startup time
 
 When the `FroalaEditor` or `FroalaEditorField` is created, it takes a few milliseconds for the wrapped Froala instance
 to be created and initialized. When setting up events, this is transparent, but if you need to detect when the instance
@@ -201,12 +201,55 @@ to _true_ when the component is initialized.
 
 This code illustrates the relationship between the property and event.
 
-    var myFroalaComponent = Ext.create({
-        xtype:'froalaeditor',
-        listeners: {
-            ready: function(){
-                console.log(myFroalaCompoennt.getEditor().isReady
+    @example
+    Example.main.MainController({
+        extends: 'Ext.app.ViewController',
+        init: function(){
+            console.log(this.lookup('froalaeditor').getEditor().isReady); // Logs false
+        },
+        onReady: function(){
+            console.log(this.lookup('froalaeditor').getEditor().isReady); // Logs true
+        }
+    });
+    
+    Example.main.Main({
+        extends: 'Ext.Panel',
+        controller: {
+            xclass: 'Example.main.MainController'
+        },
+        layout: 'fit',
+        items: [{
+            xtype: 'froalaeditor',
+            reference: 'froalaeditor',
+            listeners: {
+                ready: 'onReady'
             }
-
-
+        }]
+    });
+ 
+    Ext.application({
+        name: 'Example',
+        mainView: 'Example.main.Main'
+    });
+    
 #### Specifying a Froala activation key
+
+To use a licensed copy of the Froala Editor, you need an _activation key_, as documented at
+https://wysiwyg-editor.froala.help/hc/en-us/articles/115000394945-What-is-an-Activation-Key-
+
+You then specify the key in your applications `app.json`, within a config block named `froala`. This 
+is an example that shows a section of `app.json` with the `requires` entry for the `froana-editor`
+code package, as well as the specification for the activation key.
+
+    {
+        "name": "MyApp",
+        "namespace": "MyApp",
+        "framework": "ext",
+        "requires": ["font-awesome", "froala-editor"],
+        "froala" {
+            "activation-key": "my-activation-key"
+        }
+        ...
+    }
+
+
