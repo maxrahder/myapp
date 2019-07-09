@@ -6,7 +6,7 @@ There are two versions of the component: a field version, for use in forms, and 
 anywhere else.
 
 Both classes are simple wrappers around the Froala WYSIWYG editor, documented at https://www.froala.com/wysiwyg-editor.
-Since these are ExtJS components, you can use them like any other ExtJS component, including setting up listeners
+These are ExtJS components, so you can use them like any other component, including setting up listeners
 to detect component events and Froala native events. You can also run native Froala methods directly on the 
 Froana instance.
 
@@ -21,9 +21,9 @@ Links to detailed installation staps are given below, but in a nutshell you must
 3. Require the code package in your app's `app.json`
 4. Add the package to your app's `workspace.json`
 
-For details on NPM repo login see [Login to the NPM repository](https://docs.sencha.com/extjs/6.7.0/guides/getting_started/open_tooling.html#getting_started-_-open_tooling_-_step_2__login_to_the_npm_repository).
+For details on NPM repo login see [Login to the NPM repository](https://docs.sencha.com/extjs/7.0.0/guides/ea_getting_started/open_tooling.html#getting_started-_-open_tooling_-_step_2__login_to_the_npm_repository).
 
-For details on adding a package see [Premium Packages - Add App Functionality Quickly](https://docs.sencha.com/extjs/6.7.0/guides/getting_started/open_tooling.html#getting_started-_-open_tooling_-_premium_packages___add_app_functionality_quickly).
+For details on adding a package see [Premium Packages - Add App Functionality Quickly](https://docs.sencha.com/extjs/7.0.0/guides/ea_getting_started/open_tooling.html#getting_started-_-open_tooling_-_premium_packages___add_app_functionality_quickly).
 
 
 ### Using the Froala Editor
@@ -139,7 +139,7 @@ calling `getValue()` on the form.
 #### Froala instance configuration
 
 The `editor` config lets you configuration options for the Froala editor instance. You can use any Froala config, 
-as documented at https://www.froala.com/wysiwyg-editor/docs/options
+as documented at [Froala Options](https://www.froala.com/wysiwyg-editor/docs/options).
 
     @example
     Example.main.Main({
@@ -164,7 +164,7 @@ as documented at https://www.froala.com/wysiwyg-editor/docs/options
 
 To listen to events, use the standard `listeners` component config. You can listen to native Froala events
 by using the _froala_ prefix on the event name. Froala events are docuemnted at 
-https://www.froala.com/wysiwyg-editor/docs/events.
+[Froala Events](https://www.froala.com/wysiwyg-editor/docs/events).
 
 This example shows a Froala editor configured with listener for its _change_ event, and in addition, a
 listener to the native Froala _click_ event, specified by using the _froala-+ prefix.
@@ -197,7 +197,7 @@ listener to the native Froala _click_ event, specified by using the _froala-+ pr
 #### Running Froala native methods
 
 To run native Froala methods, use `getEditor()` to get a reference to the Froala instance, then
-run any method you wish. Froala methods are documented at https://www.froala.com/wysiwyg-editor/docs/methods.
+run any method you wish. Froala methods are documented at [Froala Methods](https://www.froala.com/wysiwyg-editor/docs/methods).
 
 For example, to create a 
 
@@ -244,7 +244,8 @@ This code illustrates the relationship between the property and event.
 ### Specifying a Froala activation key
 
 To use a licensed copy of the Froala Editor, you need an _activation key_, as documented at
-https://wysiwyg-editor.froala.help/hc/en-us/articles/115000394945-What-is-an-Activation-Key-
+[What is an Activation Key?](https://wysiwyg-editor.froala.help/hc/en-us/articles/115000394945-What-is-an-Activation-Key-)
+
 
 You then specify the key in your applications `app.json`, within a config block named `froala`. This 
 is an example that shows a section of `app.json` with the `requires` entry for the `froana-editor`
