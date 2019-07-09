@@ -42,15 +42,14 @@ There are two primary configs: `value`, which is the HTML value of the editor, a
 configuration for the Froala Editor instance being created.
 
     @example
-    Example.main.Main({
-        extends: 'Ext.Panel',
+    Ext.define('Example.main.Main', {
+        extend: 'Ext.Panel',
         layout: 'fit',
         items: [{
             xtype: 'froalaeditor',
             value: 'Hello world!'
         }]
     });
- 
     Ext.application({
         name: 'Example',
         mainView: 'Example.main.Main'
@@ -65,35 +64,31 @@ property. Note that `value` is HTMl and therefore, will contain HTML tags.
     console.log(myFroalaComponent.getValue()); // Logs "<p>Hello world!</p>"
 
     @example
-    Example.main.Main({
-        extends: 'Ext.Panel',
+    Ext.define('Example.main.Main', {
+        extend: 'Ext.Panel',
         viewModel: {
             data: {
                 html: '<p>Hello world!</p>'
             },
             formulas: {
-                encodedHtml: function(get) {
+                encodedHtml: function (get) {
                     return Ext.htmlEncode(get('html'));
                 }
             }
         },
         title: 'Froala Editor',
-        tbar: [
-            {
-                xtype: 'label',
-                bind: {
-                    html: '{html}' // Show the HTML with embeded markup
-                }
+        tbar: [{
+            xtype: 'label',
+            bind: {
+                html: '{html}' // Show the HTML with embeded markup
             }
-        ],
-        bbar: [
-            {
-                xtype: 'label',
-                bind: {
-                    html: '{encodedHtml}' // So the raw HTML content
-                }
+        }],
+        bbar: [{
+            xtype: 'label',
+            bind: {
+                html: '{encodedHtml}' // So the raw HTML content
             }
-        ],
+        }],
         layout: 'fit',
         items: [{
             xtype: 'froalaeditor',
@@ -102,18 +97,18 @@ property. Note that `value` is HTMl and therefore, will contain HTML tags.
             }
         }]
     });
- 
     Ext.application({
         name: 'Example',
         mainView: 'Example.main.Main'
     });
 
+
 Within a form you can use the field version. Its name-value pair will be relfected in form submits, or when
 calling `getValue()` on the form.
 
     @example
-    Example.main.Main({
-        extends: 'Ext.form.Panel',
+    Ext.define('Example.main.Main', {
+        extend: 'Ext.Panel',
         layout: 'fit',
         items: [{
             xtype: 'froalaeditor',
@@ -123,13 +118,12 @@ calling `getValue()` on the form.
         buttons: {
             ok: {
                 text: 'Submit',
-                handler: function(button) {
+                handler: function (button) {
                     // From here, running "submit()" will include "html", and its value, as a query field.
                 }
             }
         }
     });
- 
     Ext.application({
         name: 'Example',
         mainView: 'Example.main.Main'
@@ -142,19 +136,19 @@ The `editor` config lets you configuration options for the Froala editor instanc
 as documented at [Froala Options](https://www.froala.com/wysiwyg-editor/docs/options).
 
     @example
-    Example.main.Main({
-        extends: 'Ext.Panel',
+    Ext.define('Example.main.Main', {
+        extend: 'Ext.Panel',
         layout: 'fit',
         items: [{
             xtype: 'froalaeditor',
             value: 'Hello world!',
             editor: {
                 autofocus: true,
+                // Look under the "More Text | Font Size" menu
                 fontSize: ['10', '12', '16', '24']
             }
         }]
     });
- 
     Ext.application({
         name: 'Example',
         mainView: 'Example.main.Main'
@@ -170,24 +164,27 @@ This example shows a Froala editor configured with listener for its _change_ eve
 listener to the native Froala _click_ event, specified by using the _froala-+ prefix.
 
     @example
-    Example.main.Main({
-        extends: 'Ext.Panel',
+    Ext.define('Example.main.Main', {
+        extend: 'Ext.Panel',
         layout: 'fit',
         items: [{
             xtype: 'froalaeditor',
             value: 'Hello world!',
             listeners: {
-                change: function(froalaComponent) {
-                    Ext.toast({ message: 'Change!' });
+                change: function (froalaComponent) {
+                    Ext.toast({
+                        message: 'Change!'
+                    });
                 },
                 // Native Froala events are prefixed with 'froala.'
-                'froala.click': function(froalaComponent) {
-                    Ext.toast({ message: 'Click!' });
+                'froala.click': function (froalaComponent) {
+                    Ext.toast({
+                        message: 'Click!'
+                    });
                 }
             }
         }]
     });
- 
     Ext.application({
         name: 'Example',
         mainView: 'Example.main.Main'
@@ -211,18 +208,18 @@ to _true_ when the component is initialized.
 This code illustrates the relationship between the property and event.
 
     @example
-    Example.main.MainController({
-        extends: 'Ext.app.ViewController',
-        init: function(){
+    Ext.define('Example.main.MainController', {
+        extend: 'Ext.app.ViewController',
+        init: function () {
             console.log(this.lookup('froalaeditor').getEditor().isReady); // Logs false
         },
-        onReady: function(){
+        onReady: function () {
             console.log(this.lookup('froalaeditor').getEditor().isReady); // Logs true
         }
     });
-    
-    Example.main.Main({
-        extends: 'Ext.Panel',
+
+    Ext.define('Example.main.Main', {
+        extend: 'Ext.Panel',
         controller: {
             xclass: 'Example.main.MainController'
         },
@@ -235,11 +232,12 @@ This code illustrates the relationship between the property and event.
             }
         }]
     });
- 
+
     Ext.application({
         name: 'Example',
         mainView: 'Example.main.Main'
     });
+
     
 ### Specifying a Froala activation key
 
