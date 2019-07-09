@@ -1,7 +1,6 @@
-## Froala WYSIWYG editor in ExtSJ 7.0 Early Access
+## Froala WYSIWYG editor in ExtJS 7.0 (Early Access)
 
 The ExtJS 7.0 has a Premium code package that lets you us the Froala WYSIWYG editor within your applications.
-
 
 There are two versions of the editor: a field version, for use in forms, and a regular component version, used
 when you don't need its value to be included in a form submit.
@@ -13,8 +12,17 @@ Froana instance.
 
 ### Installation
 
+In the Early Access release, the Froala code package is only available via `ext-gen` and `npm`. 
 
-### Licensing
+The detailed steps to install a package are documented at , but in a nutshell you must:
+1. Log in to the Sencha NPM repository
+2. Use a terminal window and navigate to your `ext-gen` project, and run `npm install @sencha/ext-froala-editor`
+3. Require the code package in your app's `app.json`
+4. Add the package to your app's `workspace.json`
+
+For details on NPM repo login see (Login to the NPM repository)[https://docs.sencha.com/extjs/6.7.0/guides/getting_started/open_tooling.html#getting_started-_-open_tooling_-_step_2__login_to_the_npm_repository].
+
+For details on adding a package see (Premium Packages - Add App Functionality Quickly)[https://docs.sencha.com/extjs/6.7.0/guides/getting_started/open_tooling.html#getting_started-_-open_tooling_-_premium_packages___add_app_functionality_quickly]
 
 
 ### Using the Froala Editor
