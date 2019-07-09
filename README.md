@@ -1,6 +1,15 @@
 ## Froala WYSIWYG editor in ExtSJ 7.0 Early Access
 
-The ExtJS 7.0 had a Premium code package for the Froala WYSIWYG editor. 
+The ExtJS 7.0 has a Premium code package that lets you us the Froala WYSIWYG editor within your applications.
+
+
+There are two versions of the editor: a field version, for use in forms, and a regular component version, used
+when you don't need its value to be included in a form submit.
+
+Both classes are simple wrappers around the Froala WYSIWYG editor, documented at https://www.froala.com/wysiwyg-editor.
+Since these are ExtJS components, you can use them like any other ExtJS component, including setting up listeners
+to detect both component events and Froala native events. You can also run native Froala methods directly on the 
+Froana instance.
 
 ### Installation
 
@@ -45,19 +54,17 @@ configuration for the Froala Editor instance being created.
 ### The value config
 
 The `value` config specifies the initial value of the editor. `value` is bindable and is the default bind
-property. 
+property. Note that `value` is HTMl and therefore, will contain HTML tags. 
 
-Note that `value` is HTMl and therefore, will contain HTML tags. 
-
-        myFroalaComponent.setValue('Hello world!');
-        console.log(myFroalaComponent.getValue()); // Logs "<p>HelloWorld!</p>"
+    myFroalaComponent.setValue('Hello world!');
+    console.log(myFroalaComponent.getValue()); // Logs "<p>Hello world!</p>"
 
     @example
     Example.main.Main({
         extends: 'Ext.Panel',
         viewModel: {
             data: {
-                html: '<p>Four score and seven years ago.</p>'
+                html: '<p>Hello world!</p>'
             },
             formulas: {
                 encodedHtml: function(get) {
@@ -86,7 +93,7 @@ Note that `value` is HTMl and therefore, will contain HTML tags.
         items: [{
             xtype: 'froalaeditor',
             bind: {
-                value: '{foo}' // value is also the default bind property
+                value: '{html}' // value is also the default bind property
             }
         }]
     });
@@ -96,7 +103,7 @@ Note that `value` is HTMl and therefore, will contain HTML tags.
         mainView: 'Example.main.Main'
     });
 
-If used in a form, you can use the field version. Its name-value pair will be relfected in form submits, when
+Within a form you can use the field version. Its name-value pair will be relfected in form submits, or when
 calling `getValue()` on the form.
 
     @example
@@ -105,11 +112,17 @@ calling `getValue()` on the form.
         layout: 'fit',
         items: [{
             xtype: 'froalaeditor',
+            name: 'html',
             value: 'Hello world!'
         }],
-        buttons: [{
-            
-        }]
+        buttons: {
+            ok: {
+                text: 'Submit',
+                handler: function(button) {
+                    // From here, running "submit()" will include "html", and its value, as a query field.
+                }
+            }
+        }
     });
  
     Ext.application({
@@ -118,12 +131,72 @@ calling `getValue()` on the form.
     });
     
     
-####Froala instance configuration
+#### Froala instance configuration
+
+The `editor` config lets you configuration options for the Froala editor instance. You can use any Froala config, 
+as documented at https://www.froala.com/wysiwyg-editor/docs/options
+
+    @example
+    Example.main.Main({
+        extends: 'Ext.Panel',
+        layout: 'fit',
+        items: [{
+            xtype: 'froalaeditor',
+            value: 'Hello world!',
+            editor: {
+                autofocus: true,
+                fontSize: ['10', '12', '16', '24']
+            }
+        }]
+    });
+ 
+    Ext.application({
+        name: 'Example',
+        mainView: 'Example.main.Main'
+    });
+
+#### Events
+
+To listen to events, use the standard `listeners` component config. You can listen to native Froala events
+by using the _froala_ prefix on the event name. Froala events are docuemnted at 
+https://www.froala.com/wysiwyg-editor/docs/events.
+
+This example shows a Froala editor configured with listener for its _change_ event, and in addition, a
+listener to the native Froala _click_ event, specified by using the _froala-+ prefix.
+
+    @example
+    Example.main.Main({
+        extends: 'Ext.Panel',
+        layout: 'fit',
+        items: [{
+            xtype: 'froalaeditor',
+            value: 'Hello world!',
+            listeners: {
+                change: function(froalaComponent) {
+                    Ext.toast({ message: 'Change!' });
+                },
+                // Native Froala events are prefixed with 'froala.'
+                'froala.click': function(froalaComponent) {
+                    Ext.toast({ message: 'Click!' });
+                }
+            }
+        }]
+    });
+ 
+    Ext.application({
+        name: 'Example',
+        mainView: 'Example.main.Main'
+    });
 
 
-####Events
+### The `ready` event
 
+When the `FroalaEditor` or `FroalaEditorField` is created, it takes a few milliseconds for the wrapped Froala instance
+to be created and initialized. When setting up events, this is transparent, but if you need to detect when the instance
+is ready, use the _ready_ event. The instance also has a _isReady_ boolean property that starts out _false_, and changes
+to _true_ when the component is initialized.
 
+. But in case you need to detect when 
 
 ####Running Froala native methods
 
