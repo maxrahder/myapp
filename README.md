@@ -13,15 +13,11 @@ Froana instance.
 
 ### Installation
 
-You will need a current version of **Sencha Cmd** for any serious work on the SDK. To get
-the current development build, download and install the lastPinned build from
-[Team City](https://teamcity.sencha.com/viewLog.html?buildTypeId=Cmd_60x_Continuous&buildId=lastPinned).
 
 ### Licensing
 
-Setup Git and learn our [Git Workflow](docs/internal/workflow.md).
 
-###Using the Froala Editor
+### Using the Froala Editor
 
 There are two versions of the Froala Editor: 
 - A component version &mdash; `Ext.froala.Editor`
@@ -189,6 +185,13 @@ listener to the native Froala _click_ event, specified by using the _froala-+ pr
     });
 
 
+#### Running Froala native methods
+
+To run native Froala methods, use `getEditor()` to get a reference to the Froala instance, then
+run any method you wish. Froala methods are documented at https://www.froala.com/wysiwyg-editor/docs/methods.
+
+For example, to create a 
+
 ### The `ready` event
 
 When the `FroalaEditor` or `FroalaEditorField` is created, it takes a few milliseconds for the wrapped Froala instance
@@ -196,10 +199,14 @@ to be created and initialized. When setting up events, this is transparent, but 
 is ready, use the _ready_ event. The instance also has a _isReady_ boolean property that starts out _false_, and changes
 to _true_ when the component is initialized.
 
-. But in case you need to detect when 
+This code illustrates the relationship between the property and event.
 
-####Running Froala native methods
+    var myFroalaComponent = Ext.create({
+        xtype:'froalaeditor',
+        listeners: {
+            ready: function(){
+                console.log(myFroalaCompoennt.getEditor().isReady
+            }
 
 
-
-####Specifying a Froala activation key
+#### Specifying a Froala activation key
