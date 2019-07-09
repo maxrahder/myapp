@@ -1,4 +1,4 @@
-##Froala WYSIWYG editor in ExtSJ 7.0 Early Access
+## Froala WYSIWYG editor in ExtSJ 7.0 Early Access
 
 The ExtJS 7.0 had a Premium code package for the Froala WYSIWYG editor. 
 
@@ -22,7 +22,7 @@ These components are wrappers around a Froala Editor instance. They are configur
 but the field version extends `Ext.field.Field`, and consequently, can be given a `name` and `value`, 
 and be used in field panels and form panels.
 
-####Basic usage
+#### Basic usage
 
 There are two primary configs: `value`, which is the HTML value of the editor, and `editor`, which is the 
 configuration for the Froala Editor instance being created.
@@ -42,7 +42,7 @@ configuration for the Froala Editor instance being created.
         mainView: 'Example.main.Main'
     });
 
-###The value config
+### The value config
 
 The `value` config specifies the initial value of the editor. `value` is bindable and is the default bind
 property. 
