@@ -56,7 +56,7 @@ configuration for the Froala Editor instance being created.
         mainView: 'Example.main.Main'
     });
 
-### The value config
+#### The value config
 
 The `value` config specifies the initial value of the editor. `value` is bindable and is the default bind
 property. Note that `value` is HTMl and therefore, will contain HTML tags. 
@@ -241,7 +241,7 @@ This code illustrates the relationship between the property and event.
         mainView: 'Example.main.Main'
     });
     
-#### Specifying a Froala activation key
+### Specifying a Froala activation key
 
 To use a licensed copy of the Froala Editor, you need an _activation key_, as documented at
 https://wysiwyg-editor.froala.help/hc/en-us/articles/115000394945-What-is-an-Activation-Key-
