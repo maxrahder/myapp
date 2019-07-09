@@ -1,6 +1,6 @@
 ## Froala WYSIWYG editor in ExtJS 7.0 (Early Access)
 
-The ExtJS 7.0 has a Premium code package that lets you us the Froala WYSIWYG editor within your applications.
+The ExtJS 7.0 has a Premium code package that lets you use the Froala WYSIWYG editor within your applications.
 
 There are two versions of the component: a field version, for use in forms, and a regular component version, used
 anywhere else.
