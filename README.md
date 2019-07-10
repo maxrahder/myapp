@@ -14,7 +14,7 @@ Froana instance.
 
 In the Early Access release, the Froala code package is only available via `ext-gen` and `npm`. 
 
-Links to detailed installation staps are given below, but in a nutshell you must:
+Links to detailed installation steps are given below, but in a nutshell you must:
 
 1. Log in to the Sencha NPM repository
 2. Use a terminal window and navigate to your `ext-gen` project, and run `npm install @sencha/ext-froala-editor`
@@ -32,7 +32,7 @@ There are two versions of the Froala Editor:
 - A component version &mdash; `Ext.froala.Editor`
 - A field version &mdash; `Ext.froala.EditorField`
 
-These components are wrappers around a Froala Editor instance. They are configured and used identiaclly, 
+These components are wrappers around a Froala Editor instance. They are configured and used identically, 
 but the field version extends `Ext.field.Field`, and consequently, can be given a `name` and `value`, 
 and be used in field panels and form panels.
 
@@ -41,9 +41,10 @@ and be used in field panels and form panels.
 There are two primary configs: `value`, which is the HTML value of the editor, and `editor`, which is the 
 configuration for the Froala Editor instance being created.
 
-    @example
+    @example packages=[froala-editor]
     Ext.define('Example.main.Main', {
         extend: 'Ext.Panel',
+        requires: ['Ext.froala.Editor'],
         layout: 'fit',
         items: [{
             xtype: 'froalaeditor',
@@ -63,9 +64,10 @@ property. Note that `value` is HTMl and therefore, will contain HTML tags.
     myFroalaComponent.setValue('Hello world!');
     console.log(myFroalaComponent.getValue()); // Logs "<p>Hello world!</p>"
 
-    @example
+    @example packages=[froala-editor]
     Ext.define('Example.main.Main', {
         extend: 'Ext.Panel',
+        requires: ['Ext.froala.Editor'],
         viewModel: {
             data: {
                 html: '<p>Hello world!</p>'
@@ -86,7 +88,7 @@ property. Note that `value` is HTMl and therefore, will contain HTML tags.
         bbar: [{
             xtype: 'label',
             bind: {
-                html: '{encodedHtml}' // So the raw HTML content
+                html: '{encodedHtml}' // Show the raw HTML content
             }
         }],
         layout: 'fit',
@@ -106,9 +108,10 @@ property. Note that `value` is HTMl and therefore, will contain HTML tags.
 Within a form you can use the field version. Its name-value pair will be relfected in form submits, or when
 calling `getValue()` on the form.
 
-    @example
+    @example packages=[froala-editor]
     Ext.define('Example.main.Main', {
         extend: 'Ext.Panel',
+        requires: ['Ext.froala.Editor'],
         layout: 'fit',
         items: [{
             xtype: 'froalaeditor',
@@ -132,12 +135,13 @@ calling `getValue()` on the form.
     
 #### Froala instance configuration
 
-The `editor` config lets you configuration options for the Froala editor instance. You can use any Froala config, 
+The `editor` config lets you configure the Froala editor instance. You can use any Froala config, 
 as documented at [Froala Options](https://www.froala.com/wysiwyg-editor/docs/options).
 
-    @example
+    @example packages=[froala-editor]
     Ext.define('Example.main.Main', {
         extend: 'Ext.Panel',
+        requires: ['Ext.froala.Editor'],
         layout: 'fit',
         items: [{
             xtype: 'froalaeditor',
@@ -163,9 +167,10 @@ by using the _froala_ prefix on the event name. Froala events are docuemnted at
 This example shows a Froala editor configured with listener for its _change_ event, and in addition, a
 listener to the native Froala _click_ event, specified by using the _froala-+ prefix.
 
-    @example
+    @example packages=[froala-editor]
     Ext.define('Example.main.Main', {
         extend: 'Ext.Panel',
+        requires: ['Ext.froala.Editor'],
         layout: 'fit',
         items: [{
             xtype: 'froalaeditor',
@@ -196,7 +201,10 @@ listener to the native Froala _click_ event, specified by using the _froala-+ pr
 To run native Froala methods, use `getEditor()` to get a reference to the Froala instance, then
 run any method you wish. Froala methods are documented at [Froala Methods](https://www.froala.com/wysiwyg-editor/docs/methods).
 
-For example, to create a 
+For example, to get the character count you'd use this expression: 
+
+    myFroalaComponent.getEditor().charCounter.count()
+    
 
 ### Startup time
 
@@ -207,7 +215,7 @@ to _true_ when the component is initialized.
 
 This code illustrates the relationship between the property and event.
 
-    @example
+    @example packages=[froala-editor]
     Ext.define('Example.main.MainController', {
         extend: 'Ext.app.ViewController',
         init: function () {
@@ -220,6 +228,7 @@ This code illustrates the relationship between the property and event.
 
     Ext.define('Example.main.Main', {
         extend: 'Ext.Panel',
+        requires: ['Ext.froala.Editor'],
         controller: {
             xclass: 'Example.main.MainController'
         },
@@ -259,5 +268,3 @@ code package, as well as the specification for the activation key.
         }
         ...
     }
-
-
